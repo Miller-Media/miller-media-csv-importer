@@ -1,0 +1,115 @@
+# Copyright (C) 2015 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Really Really Simple CSV Importer\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/really-really-simple-csv-importer\n"
+"POT-Creation-Date: 2015-02-01 05:07:15+00:00\n"
+"PO-Revision-Date: 2026-02-12 18:38+0000\n"
+"Last-Translator: Claude (AI)\n"
+"Language-Team: Dutch\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: class-rscsv_import_post_helper.php:73
+msgid "Provided Post ID not found."
+msgstr "Opgegeven bericht-ID niet gevonden."
+
+#: class-rscsv_import_post_helper.php:179
+#: class-rscsv_import_post_helper.php:199
+#: class-rscsv_import_post_helper.php:220
+#: class-rscsv_import_post_helper.php:235
+#: class-rscsv_import_post_helper.php:251
+msgid "WP_Post object is not set."
+msgstr "WP_Post-object is niet ingesteld."
+
+#: class-rscsv_import_post_helper.php:364
+msgid "Could not get remote file."
+msgstr "Kon het externe bestand niet ophalen."
+
+#: rs-csv-importer.php:47
+msgid "Import CSV"
+msgstr "CSV importeren"
+
+#: rs-csv-importer.php:57
+msgid "Choose a CSV (.csv) file to upload, then click Upload file and import."
+msgstr "Kies een CSV-bestand (.csv) om te uploaden en klik vervolgens op Bestand uploaden en importeren."
+
+#: rs-csv-importer.php:58
+msgid "Excel-style CSV file is unconventional and not recommended. LibreOffice has enough export options and recommended for most users."
+msgstr "CSV-bestand in Excel-stijl is onconventioneel en wordt niet aanbevolen. LibreOffice heeft voldoende exportopties en wordt aanbevolen voor de meeste gebruikers."
+
+#: rs-csv-importer.php:59
+msgid "Requirements:"
+msgstr "Vereisten:"
+
+#: rs-csv-importer.php:61
+msgid "Select UTF-8 as charset."
+msgstr "Selecteer UTF-8 als tekenset."
+
+#: rs-csv-importer.php:62
+msgid "You must use field delimiter as \"%s\""
+msgstr "U moet \"%s\" gebruiken als veldscheidingsteken"
+
+#: rs-csv-importer.php:63
+msgid "You must quote all text cells."
+msgstr "U moet alle tekstcellen tussen aanhalingstekens plaatsen."
+
+#: rs-csv-importer.php:65
+msgid "Download example CSV files:"
+msgstr "Download voorbeeld CSV-bestanden:"
+
+#: rs-csv-importer.php:66
+msgid "csv"
+msgstr "csv"
+
+#: rs-csv-importer.php:67
+msgid "ods"
+msgstr "ods"
+
+#: rs-csv-importer.php:68
+msgid "(OpenDocument Spreadsheet file format for LibreOffice. Please export as csv before import)"
+msgstr "(OpenDocument-spreadsheet-bestandsformaat voor LibreOffice. Exporteer als csv voor import)"
+
+#: rs-csv-importer.php:78 rs-csv-importer.php:82
+msgid "Sorry, there has been an error."
+msgstr "Sorry, er is een fout opgetreden."
+
+#: rs-csv-importer.php:83
+msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
+msgstr "Het exportbestand kon niet worden gevonden op <code>%s</code>. Dit werd waarschijnlijk veroorzaakt door een machtigingsprobleem."
+
+#: rs-csv-importer.php:148
+msgid "Failed to open file."
+msgstr "Kan bestand niet openen."
+
+#: rs-csv-importer.php:174
+msgid "Invalid post type \"%s\"."
+msgstr "Ongeldig berichttype \"%s\"."
+
+#: rs-csv-importer.php:177
+msgid "Note: Please include post_type value if that is possible."
+msgstr "Let op: Voeg indien mogelijk de post_type-waarde toe."
+
+#: rs-csv-importer.php:192
+msgid "The post type value from your csv file does not match the existing data in your database. post_id: %d, post_type(csv): %s, post_type(db): %s"
+msgstr "De post_type-waarde uit uw csv-bestand komt niet overeen met de bestaande gegevens in uw database. post_id: %d, post_type(csv): %s, post_type(db): %s"
+
+#: rs-csv-importer.php:367
+msgid "Processing \"%s\" done."
+msgstr "Verwerking van \"%s\" voltooid."
+
+#: rs-csv-importer.php:386
+msgid "All Done."
+msgstr "Alles klaar."
+
+#: rs-csv-importer.php:419
+msgid "CSV"
+msgstr "CSV"
+
+#: rs-csv-importer.php:419
+msgid "Import posts, categories, tags, custom fields from simple csv file."
+msgstr "Importeer berichten, categorieën, tags, aangepaste velden uit een eenvoudig csv-bestand."

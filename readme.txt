@@ -74,6 +74,23 @@ Add star and contribute on [GitHub](https://github.com/Miller-Media/really-reall
 
 Original repository by Takuro Hishikawa: [GitHub](https://github.com/hissy/rs-csv-importer)
 
+= Localizations =
+The plugin is available in the following languages:
+
+* 🇺🇸 English (default)
+* 🇫🇷 French (fr_FR)
+* 🇯🇵 Japanese (ja)
+* 🇪🇸 Spanish (es_ES)
+* 🇩🇪 German (de_DE)
+* 🇨🇳 Chinese Simplified (zh_CN)
+* 🇧🇷 Portuguese - Brazil (pt_BR)
+* 🇮🇹 Italian (it_IT)
+* 🇷🇺 Russian (ru_RU)
+* 🇵🇱 Polish (pl_PL)
+* 🇳🇱 Dutch (nl_NL)
+* 🇹🇷 Turkish (tr_TR)
+* 🇸🇪 Swedish (sv_SE)
+
 = Thanks =
 * Original plugin created by [Takuro Hishikawa](https://github.com/hissy)
 * Cover banner designed by @[luchino__](http://uwasora.com/)

@@ -1,17 +1,22 @@
-=== Really Simple CSV Importer ===
-Contributors: hissy
-Tags: importer, csv, acf, cfs, scf
-Requires at least: 3.6
-Tested up to: 4.3
-Stable tag: 1.3
+=== Really Really Simple CSV Importer ===
+Contributors: MillerMediaNow, hissy
+Tags: importer, csv, acf, cfs, scf, import, posts, custom-fields
+Requires at least: 5.0
+Tested up to: 6.9.1
+Requires PHP: 8.1
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Alternative CSV Importer plugin. Simple and powerful, best for geeks.
+Import posts, pages, custom post types, categories, tags, and custom fields from a simple CSV file. Maintained fork with PHP 8.1+ support.
 
 == Description ==
 
-Alternative CSV Importer plugin. Simple and powerful, best for geeks.
+**This plugin is a maintained fork of [Really Simple CSV Importer](https://wordpress.org/plugins/really-simple-csv-importer/) originally created by [Takuro Hishikawa](https://github.com/hissy). We are grateful for his work and his blessing to continue this project.**
+
+Really Really Simple CSV Importer is a powerful yet simple CSV import plugin for WordPress, perfect for developers and site administrators who need reliable bulk import functionality.
+
+= Features =
 
 * Category support
 * Tag support
@@ -22,10 +27,13 @@ Alternative CSV Importer plugin. Simple and powerful, best for geeks.
 * Custom Taxonomy support
 * Custom Post Type support
 * Filter hook for dry-run-testing
-* [Filter hooks for customized csv data importing](https://wordpress.org/plugins/really-simple-csv-importer/other_notes/) to database
+* [Filter hooks for customized csv data importing](https://wordpress.org/plugins/really-really-simple-csv-importer/other_notes/) to database
 * Action hook for update post data after importing to database
+* PHP 8.1+ compatible
+* Security hardened with proper sanitization and escaping
+* WordPress 6.9+ compatible
 
-You can get example CSV files in `/wp-content/plugins/really-simple-csv-importer/sample` directory.
+You can get example CSV files in `/wp-content/plugins/really-really-simple-csv-importer/sample` directory.
 
 = Available column names and values: =
 * `ID` or `post_id`: (int) post id.
@@ -62,14 +70,17 @@ If advanced custom field key is exists, importer will trying to use [update_fiel
 How to find advanced custom field key: [Finding the field key](http://www.advancedcustomfields.com/resources/functions/update_field/#finding-the%20field%20key)
 
 = Official public repository =
-Add star and read future issues about rs-csv-importer on [GitHub](https://github.com/hissy/rs-csv-importer)!
+Add star and contribute on [GitHub](https://github.com/Miller-Media/really-really-simple-csv-importer)!
+
+Original repository by Takuro Hishikawa: [GitHub](https://github.com/hissy/rs-csv-importer)
 
 = Thanks =
-Cover banner designed by @[luchino__](http://uwasora.com/)
+* Original plugin created by [Takuro Hishikawa](https://github.com/hissy)
+* Cover banner designed by @[luchino__](http://uwasora.com/)
 
 == Installation ==
 
-1. Upload All files to the `/wp-content/plugins/` directory.
+1. Upload all files to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Go to the Import page under Tools menu.
 4. Click CSV link, read the notification, then just upload and import.
@@ -204,6 +215,17 @@ function rsc_import_images( $meta, $post, $is_update ) {
   return $meta;
 }
 `
+
+= What's the difference between this and the original Really Simple CSV Importer? =
+
+This is a maintained fork that provides:
+* PHP 8.1+ compatibility
+* WordPress 6.9+ compatibility
+* Enhanced security with proper sanitization and escaping
+* Improved code standards
+* Active maintenance and support
+
+The original plugin was last updated in 2017 and is no longer maintained. This fork maintains backward compatibility with all filter hooks and functionality from the original while providing modern PHP and WordPress support.
 
 == How to debug import data ==
 
@@ -349,6 +371,31 @@ Example: Update row based on a custom field ID/key match (Download from [gist](h
 
 == Changelog ==
 
+= 2.0.0 =
+* **MAJOR UPDATE**: Rebrand to Really Really Simple CSV Importer
+* **PHP 8.1+ compatibility**: Fixed all deprecated features and warnings
+  * Fixed dynamic property declarations
+  * Updated date() to gmdate() for proper timezone handling
+  * Added proper type checking and null safety
+  * Removed deprecated syntax
+* **Security hardening**:
+  * Added proper sanitization for all user inputs (sanitize_text_field, sanitize_key, absint, esc_url_raw)
+  * Added proper escaping for all outputs (esc_html, esc_attr, esc_url)
+  * Enhanced nonce verification
+  * Improved file upload security
+* **WordPress 6.9.1 compatibility**: Tested and verified
+* **Code quality improvements**:
+  * Added comprehensive PHPDoc blocks
+  * Improved WordPress coding standards compliance
+  * Added ABSPATH security checks
+  * Better code organization and readability
+* **Backward compatibility**: All filter hooks and action hooks maintained for existing implementations
+* **Text domain updated** to `really-really-simple-csv-importer`
+* **New**: Added plugin version constant `RRSCI_PLUGIN_VERSION`
+* **Minimum requirements updated**:
+  * WordPress 5.0+
+  * PHP 8.1+
+
 = 1.3 =
 * Some Enhancements (Thanks @piwi!)
   * Attachment support
@@ -358,7 +405,7 @@ Example: Update row based on a custom field ID/key match (Download from [gist](h
 * Support post password
 = 1.2 =
 * Enhancement: Smart Custom Fields support
-* Check if the provided post status is already registered
+* Check if the post status is already registered
 = 1.1 =
 * Enhancement: Support localization
 * Bug fixes
@@ -410,6 +457,9 @@ Example: Update row based on a custom field ID/key match (Download from [gist](h
 * First Release (beta)
 
 == Upgrade Notice ==
+
+= 2.0.0 =
+Major update with PHP 8.1+ compatibility and security hardening. Backward compatible with all existing filter hooks. Recommended for all users, especially those running PHP 8.1+.
 
 = 1.0 =
 * wp_post_helper class is deprecated.

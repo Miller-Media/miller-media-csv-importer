@@ -10,34 +10,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * RSCSV_Import_Post_Helper class.
+ * RRSCI_Import_Post_Helper class.
  */
-class RSCSV_Import_Post_Helper {
-	
+class RRSCI_Import_Post_Helper {
+
 	/**
 	 * Custom Field Suite prefix
 	 */
 	const CFS_PREFIX = 'cfs_';
-	
+
 	/**
 	 * Smart Custom Fields prefix
 	 */
 	const SCF_PREFIX = 'scf_';
-	
+
 	/**
 	 * WP_Post object
 	 *
 	 * @var WP_Post|null
 	 */
 	private $post = null;
-	
+
 	/**
 	 * WP_Error object
 	 *
 	 * @var WP_Error|null
 	 */
 	private $error = null;
-	
+
 	/**
 	 * Add an error or append additional message to this object.
 	 *
@@ -47,12 +47,12 @@ class RSCSV_Import_Post_Helper {
 	 */
 	public function addError( $code, $message, $data = '' ) {
 		if ( ! $this->isError() ) {
-			$e = new WP_Error();
+			$e           = new WP_Error();
 			$this->error = $e;
 		}
 		$this->error->add( $code, $message, $data );
 	}
-	
+
 	/**
 	 * Get the error of this object
 	 *
@@ -65,7 +65,7 @@ class RSCSV_Import_Post_Helper {
 		}
 		return $this->error;
 	}
-	
+
 	/**
 	 * Check if the object has some Errors.
 	 *
@@ -74,7 +74,7 @@ class RSCSV_Import_Post_Helper {
 	public function isError() {
 		return is_wp_error( $this->error );
 	}
-	
+
 	/**
 	 * Set WP_Post object
 	 *
@@ -88,7 +88,7 @@ class RSCSV_Import_Post_Helper {
 			$this->addError( 'post_id_not_found', __( 'Provided Post ID not found.', 'really-really-simple-csv-importer' ) );
 		}
 	}
-	
+
 	/**
 	 * Get WP_Post object
 	 *
@@ -97,27 +97,27 @@ class RSCSV_Import_Post_Helper {
 	public function getPost() {
 		return $this->post;
 	}
-	
+
 	/**
 	 * Get object by post id.
 	 *
 	 * @param int $post_id Post ID.
-	 * @return RSCSV_Import_Post_Helper
+	 * @return RRSCI_Import_Post_Helper
 	 */
 	public static function getByID( $post_id ) {
-		$object = new RSCSV_Import_Post_Helper();
+		$object = new RRSCI_Import_Post_Helper();
 		$object->setPost( $post_id );
 		return $object;
 	}
-	
+
 	/**
 	 * Add a post
 	 *
 	 * @param array $data An associative array of the post data.
-	 * @return RSCSV_Import_Post_Helper
+	 * @return RRSCI_Import_Post_Helper
 	 */
 	public static function add( $data ) {
-		$object = new RSCSV_Import_Post_Helper();
+		$object = new RRSCI_Import_Post_Helper();
 
 		if ( isset( $data['post_type'] ) && 'attachment' === $data['post_type'] ) {
 			$post_id = $object->addMediaFile( $data['media_file'], $data );
@@ -131,7 +131,7 @@ class RSCSV_Import_Post_Helper {
 		}
 		return $object;
 	}
-	
+
 	/**
 	 * Update post
 	 *
@@ -153,7 +153,7 @@ class RSCSV_Import_Post_Helper {
 			$this->setPost( $post_id );
 		}
 	}
-	
+
 	/**
 	 * Set meta fields by array
 	 *
@@ -169,9 +169,9 @@ class RSCSV_Import_Post_Helper {
 				$this->cfsSave( substr( $key, strlen( self::CFS_PREFIX ) ), $value );
 				$is_cfs = 1;
 			} elseif ( strpos( $key, self::SCF_PREFIX ) === 0 ) {
-				$scf_key = substr( $key, strlen( self::SCF_PREFIX ) );
+				$scf_key              = substr( $key, strlen( self::SCF_PREFIX ) );
 				$scf_array[ $scf_key ][] = $value;
-				$is_scf = 1;
+				$is_scf               = 1;
 			} else {
 				if ( function_exists( 'get_field_object' ) ) {
 					if ( strpos( $key, 'field_' ) === 0 ) {
@@ -194,7 +194,7 @@ class RSCSV_Import_Post_Helper {
 		}
 		$this->scfSave( $scf_array );
 	}
-	
+
 	/**
 	 * A wrapper of update_post_meta
 	 *
@@ -209,7 +209,7 @@ class RSCSV_Import_Post_Helper {
 			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
 		}
 	}
-	
+
 	/**
 	 * A wrapper of update_field of Advanced Custom Fields
 	 *
@@ -228,7 +228,7 @@ class RSCSV_Import_Post_Helper {
 			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
 		}
 	}
-	
+
 	/**
 	 * A wrapper of CFS()->save()
 	 *
@@ -249,7 +249,7 @@ class RSCSV_Import_Post_Helper {
 			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
 		}
 	}
-	
+
 	/**
 	 * A wrapper of Smart_Custom_Fields_Meta()->save()
 	 *
@@ -259,9 +259,9 @@ class RSCSV_Import_Post_Helper {
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
 			if ( class_exists( 'Smart_Custom_Fields_Meta' ) && is_array( $data ) ) {
-				$_data = array();
+				$_data                        = array();
 				$_data['smart-custom-fields'] = $data;
-				$meta = new Smart_Custom_Fields_Meta( $post );
+				$meta                         = new Smart_Custom_Fields_Meta( $post );
 				$meta->save( $_data );
 			} elseif ( is_array( $data ) ) {
 				foreach ( $data as $key => $array ) {
@@ -274,7 +274,7 @@ class RSCSV_Import_Post_Helper {
 			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
 		}
 	}
-	
+
 	/**
 	 * A wrapper of wp_set_post_tags
 	 *
@@ -288,7 +288,7 @@ class RSCSV_Import_Post_Helper {
 			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
 		}
 	}
-	
+
 	/**
 	 * A wrapper of wp_set_object_terms
 	 *
@@ -303,7 +303,7 @@ class RSCSV_Import_Post_Helper {
 			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
 		}
 	}
-	
+
 	/**
 	 * Add attachment file. Automatically get remote file
 	 *
@@ -315,18 +315,18 @@ class RSCSV_Import_Post_Helper {
 		if ( empty( $file ) ) {
 			return false;
 		}
-		
-		if ( parse_url( $file, PHP_URL_SCHEME ) ) {
+
+		if ( wp_parse_url( $file, PHP_URL_SCHEME ) ) {
 			$file = $this->remoteGet( $file );
 		}
 		$id = $this->setAttachment( $file, $data );
 		if ( $id ) {
 			return $id;
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Add attachment file and set as thumbnail. Automatically get remote file
 	 *
@@ -337,10 +337,10 @@ class RSCSV_Import_Post_Helper {
 		if ( empty( $file ) ) {
 			return false;
 		}
-		
+
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
-			if ( parse_url( $file, PHP_URL_SCHEME ) ) {
+			if ( wp_parse_url( $file, PHP_URL_SCHEME ) ) {
 				$file = $this->remoteGet( $file );
 			}
 			$thumbnail_id = $this->setAttachment( $file );
@@ -351,10 +351,10 @@ class RSCSV_Import_Post_Helper {
 				}
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * A wrapper of wp_insert_attachment and wp_update_attachment_metadata
 	 *
@@ -421,16 +421,16 @@ class RSCSV_Import_Post_Helper {
 		if ( ! is_object( $wp_filesystem ) ) {
 			WP_Filesystem();
 		}
-		
+
 		if ( $url && is_object( $wp_filesystem ) ) {
 			$response = wp_safe_remote_get( esc_url_raw( $url ), $args );
 			if ( ! is_wp_error( $response ) && isset( $response['response']['code'] ) && 200 === $response['response']['code'] ) {
 				$destination = wp_upload_dir();
 				$filename    = basename( $url );
 				$filepath    = $destination['path'] . '/' . wp_unique_filename( $destination['path'], $filename );
-				
+
 				$body = wp_remote_retrieve_body( $response );
-				
+
 				if ( $body && $wp_filesystem->put_contents( $filepath, $body, FS_CHMOD_FILE ) ) {
 					return $filepath;
 				} else {
@@ -440,10 +440,10 @@ class RSCSV_Import_Post_Helper {
 				$this->addError( $response->get_error_code(), $response->get_error_message() );
 			}
 		}
-		
+
 		return '';
 	}
-	
+
 	/**
 	 * Destructor - unset WP_Post object
 	 */

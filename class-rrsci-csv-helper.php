@@ -10,9 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * RS_CSV_Helper class.
+ * RRSCI_CSV_Helper class.
  */
-class RS_CSV_Helper {
+class RRSCI_CSV_Helper {
 
 	/**
 	 * CSV delimiter
@@ -27,7 +27,7 @@ class RS_CSV_Helper {
 	 * @return resource|false File handle or false on failure.
 	 */
 	public function fopen( $filename, $mode = 'r' ) {
-		return fopen( $filename, $mode );
+		return fopen( $filename, $mode ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 	}
 
 	/**
@@ -38,7 +38,7 @@ class RS_CSV_Helper {
 	 * @return array|false|null Array of values or false on error.
 	 */
 	public function fgetcsv( $handle, $length = 0 ) {
-		return fgetcsv( $handle, $length, self::DELIMITER );
+		return fgetcsv( $handle, $length, self::DELIMITER ); // phpcs:ignore WordPress.WP.AlternativeFunctions.runtime_configuration_fgetcsv
 	}
 
 	/**
@@ -48,7 +48,7 @@ class RS_CSV_Helper {
 	 * @return bool True on success, false on failure.
 	 */
 	public function fclose( $fp ) {
-		return fclose( $fp );
+		return fclose( $fp ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 	}
 
 	/**

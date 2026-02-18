@@ -4,13 +4,15 @@
  * Plugin URI: https://github.com/Miller-Media/really-really-simple-csv-importer
  * Description: Import posts, pages, custom post types, categories, tags, and custom fields from a simple CSV file. Based on Really Simple CSV Importer by Takuro Hishikawa.
  * Author: Miller Media
- * Author URI: https://www.millermedia.io
+ * Author URI: https://mattmiller.ai
  * Text Domain: really-really-simple-csv-importer
  * Domain Path: /languages
  * Version: 2.0.0
  * Requires at least: 5.0
+ * Tested up to: 6.9
  * Requires PHP: 8.1
- * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * License: GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -34,8 +36,8 @@ if ( ! class_exists( 'WP_Importer' ) ) {
 }
 
 // Load Helpers
-require dirname( __FILE__ ) . '/class-rs_csv_helper.php';
-require dirname( __FILE__ ) . '/class-rscsv_import_post_helper.php';
+require dirname( __FILE__ ) . '/class-rrsci-csv-helper.php';
+require dirname( __FILE__ ) . '/class-rrsci-import-post-helper.php';
 
 /**
  * CSV Importer
@@ -45,19 +47,19 @@ require dirname( __FILE__ ) . '/class-rscsv_import_post_helper.php';
  */
 if ( class_exists( 'WP_Importer' ) ) {
 	/**
-	 * RS_CSV_Importer class.
+	 * RRSCI_CSV_Importer class.
 	 *
 	 * Extends WP_Importer to provide CSV import functionality.
 	 */
-	class RS_CSV_Importer extends WP_Importer {
-		
+	class RRSCI_CSV_Importer extends WP_Importer {
+
 		/**
 		 * Sheet columns
 		 *
 		 * @var array
 		 */
 		public $column_indexes = array();
-		
+
 		/**
 		 * Column keys
 		 *
@@ -93,7 +95,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 		public function footer() {
 			echo '</div>';
 		}
-		
+
 		/**
 		 * Step 1 - Display import form
 		 */
@@ -103,7 +105,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 			echo '<p>' . esc_html__( 'Requirements:', 'really-really-simple-csv-importer' ) . '</p>';
 			echo '<ol>';
 			echo '<li>' . esc_html__( 'Select UTF-8 as charset.', 'really-really-simple-csv-importer' ) . '</li>';
-			echo '<li>' . sprintf( esc_html__( 'You must use field delimiter as "%s"', 'really-really-simple-csv-importer' ), esc_html( RS_CSV_Helper::DELIMITER ) ) . '</li>';
+			echo '<li>' . sprintf( esc_html__( 'You must use field delimiter as "%s"', 'really-really-simple-csv-importer' ), esc_html( RRSCI_CSV_Helper::DELIMITER ) ) . '</li>';
 			echo '<li>' . esc_html__( 'You must quote all text cells.', 'really-really-simple-csv-importer' ) . '</li>';
 			echo '</ol>';
 			echo '<p>' . esc_html__( 'Download example CSV files:', 'really-really-simple-csv-importer' );
@@ -138,31 +140,35 @@ if ( class_exists( 'WP_Importer' ) ) {
 				return false;
 			} elseif ( ! file_exists( $file['file'] ) ) {
 				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'really-really-simple-csv-importer' ) . '</strong><br />';
-				printf( esc_html__( 'The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'really-really-simple-csv-importer' ), esc_html( $file['file'] ) );
+				printf(
+					/* translators: %s: file path */
+					esc_html__( 'The export file could not be found at %s. It is likely that this was caused by a permissions problem.', 'really-really-simple-csv-importer' ),
+					'<code>' . esc_html( $file['file'] ) . '</code>'
+				);
 				echo '</p>';
 				return false;
 			}
-			
-			$this->id     = (int) $file['id'];
-			$this->file   = get_attached_file( $this->id );
-			$result       = $this->process_posts();
+
+			$this->id   = (int) $file['id'];
+			$this->file = get_attached_file( $this->id );
+			$result     = $this->process_posts();
 			if ( is_wp_error( $result ) ) {
 				return $result;
 			}
 		}
-		
+
 		/**
-		 * Insert post and postmeta using `RSCSV_Import_Post_Helper` class.
+		 * Insert post and postmeta using `RRSCI_Import_Post_Helper` class.
 		 *
 		 * @param array  $post      Post data.
 		 * @param array  $meta      Meta data.
 		 * @param array  $terms     Terms data.
 		 * @param string $thumbnail The uri or path of thumbnail image.
 		 * @param bool   $is_update Whether this is an update operation.
-		 * @return RSCSV_Import_Post_Helper
+		 * @return RRSCI_Import_Post_Helper
 		 */
 		public function save_post( $post, $meta, $terms, $thumbnail, $is_update ) {
-			
+
 			// Separate the post tags from $post array
 			if ( isset( $post['post_tags'] ) && ! empty( $post['post_tags'] ) ) {
 				$post_tags = $post['post_tags'];
@@ -177,30 +183,30 @@ if ( class_exists( 'WP_Importer' ) ) {
 
 			// Add or update the post
 			if ( $is_update ) {
-				$h = RSCSV_Import_Post_Helper::getByID( $post['ID'] );
+				$h = RRSCI_Import_Post_Helper::getByID( $post['ID'] );
 				$h->update( $post );
 			} else {
-				$h = RSCSV_Import_Post_Helper::add( $post );
+				$h = RRSCI_Import_Post_Helper::add( $post );
 			}
-			
+
 			// Set post tags
 			if ( isset( $post_tags ) ) {
 				$h->setPostTags( $post_tags );
 			}
-			
+
 			// Set meta data
 			$h->setMeta( $meta );
-			
+
 			// Set terms
 			foreach ( $terms as $key => $value ) {
 				$h->setObjectTerms( $key, $value );
 			}
-			
+
 			// Add thumbnail
 			if ( $thumbnail ) {
 				$h->addThumbnail( $thumbnail );
 			}
-			
+
 			return $h;
 		}
 
@@ -208,7 +214,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 		 * Process parse csv and insert posts
 		 */
 		public function process_posts() {
-			$h = new RS_CSV_Helper();
+			$h = new RRSCI_CSV_Helper();
 
 			$handle = $h->fopen( $this->file, 'r' );
 			if ( false === $handle ) {
@@ -216,23 +222,23 @@ if ( class_exists( 'WP_Importer' ) ) {
 				wp_import_cleanup( $this->id );
 				return false;
 			}
-			
+
 			$is_first      = true;
 			$post_statuses = get_post_stati();
-			
+
 			echo '<ol>';
-			
-			while ( ( $data = $h->fgetcsv( $handle ) ) !== false ) {
+
+			while ( ( $data = $h->fgetcsv( $handle ) ) !== false ) { // phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
 				if ( $is_first ) {
 					$h->parse_columns( $this, $data );
 					$is_first = false;
 				} else {
 					echo '<li>';
-					
+
 					$post      = array();
 					$is_update = false;
 					$error     = new WP_Error();
-					
+
 					// (string) (required) post type
 					$post_type = $h->get_data( $this, $data, 'post_type' );
 					if ( $post_type ) {
@@ -244,7 +250,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 					} else {
 						echo esc_html__( 'Note: Please include post_type value if that is possible.', 'really-really-simple-csv-importer' ) . '<br>';
 					}
-					
+
 					// (int) post id
 					$post_id = $h->get_data( $this, $data, 'ID' );
 					$post_id = ( $post_id ) ? $post_id : $h->get_data( $this, $data, 'post_id' );
@@ -266,7 +272,8 @@ if ( class_exists( 'WP_Importer' ) ) {
 					$post_title = $h->get_data( $this, $data, 'post_title' );
 					if ( $post_title ) {
 
-						if ( ! $is_update && isset( $_POST['replace-by-title'] ) && 1 === (int) $_POST['replace-by-title'] ) {
+						// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in dispatch() via check_admin_referer().
+						if ( ! $is_update && isset( $_POST['replace-by-title'] ) && 1 === absint( wp_unslash( $_POST['replace-by-title'] ) ) ) {
 							// Try to update a post with the same title
 							if ( ! $post_type ) {
 								$post_type = 'post';
@@ -287,7 +294,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 					if ( $post_name ) {
 						$post['post_name'] = $post_name;
 					}
-					
+
 					// (login or ID) post_author
 					$post_author = $h->get_data( $this, $data, 'post_author' );
 					if ( $post_author ) {
@@ -311,7 +318,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 							unset( $user );
 						}
 					}
-					
+
 					// (string) publish date
 					$post_date = $h->get_data( $this, $data, 'post_date' );
 					if ( $post_date ) {
@@ -321,7 +328,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 					if ( $post_date_gmt ) {
 						$post['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', strtotime( $post_date_gmt ) );
 					}
-					
+
 					// (string) post status
 					$post_status = $h->get_data( $this, $data, 'post_status' );
 					if ( $post_status ) {
@@ -329,7 +336,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 							$post['post_status'] = $post_status;
 						}
 					}
-					
+
 					// (string) post password
 					$post_password = $h->get_data( $this, $data, 'post_password' );
 					if ( $post_password ) {
@@ -341,31 +348,31 @@ if ( class_exists( 'WP_Importer' ) ) {
 					if ( $post_content ) {
 						$post['post_content'] = $post_content;
 					}
-					
+
 					// (string) post excerpt
 					$post_excerpt = $h->get_data( $this, $data, 'post_excerpt' );
 					if ( $post_excerpt ) {
 						$post['post_excerpt'] = $post_excerpt;
 					}
-					
+
 					// (int) post parent
 					$post_parent = $h->get_data( $this, $data, 'post_parent' );
 					if ( $post_parent ) {
 						$post['post_parent'] = absint( $post_parent );
 					}
-					
+
 					// (int) menu order
 					$menu_order = $h->get_data( $this, $data, 'menu_order' );
 					if ( $menu_order ) {
 						$post['menu_order'] = absint( $menu_order );
 					}
-					
+
 					// (string) comment status
 					$comment_status = $h->get_data( $this, $data, 'comment_status' );
 					if ( $comment_status ) {
 						$post['comment_status'] = $comment_status;
 					}
-					
+
 					// (string, comma separated) slug of post categories
 					$post_category = $h->get_data( $this, $data, 'post_category' );
 					if ( $post_category ) {
@@ -374,16 +381,16 @@ if ( class_exists( 'WP_Importer' ) ) {
 							$post['post_category'] = wp_create_categories( $categories );
 						}
 					}
-					
+
 					// (string, comma separated) name of post tags
 					$post_tags = $h->get_data( $this, $data, 'post_tags' );
 					if ( $post_tags ) {
 						$post['post_tags'] = $post_tags;
 					}
-					
+
 					// (string) post thumbnail image uri
 					$post_thumbnail = $h->get_data( $this, $data, 'post_thumbnail' );
-					
+
 					$meta = array();
 					$tax  = array();
 
@@ -392,11 +399,11 @@ if ( class_exists( 'WP_Importer' ) ) {
 						if ( false !== $value && isset( $this->column_keys[ $key ] ) ) {
 							// check if meta is custom taxonomy
 							if ( substr( $this->column_keys[ $key ], 0, 4 ) === 'tax_' ) {
-								// (string, comma divided) name of custom taxonomies 
-								$customtaxes = preg_split( '/,+/', $value );
-								$taxname     = substr( $this->column_keys[ $key ], 4 );
+								// (string, comma divided) name of custom taxonomies
+								$customtaxes     = preg_split( '/,+/', $value );
+								$taxname         = substr( $this->column_keys[ $key ], 4 );
 								$tax[ $taxname ] = array();
-								foreach ( $customtaxes as $taxkey => $taxvalue ) {
+								foreach ( $customtaxes as $taxvalue ) {
 									$tax[ $taxname ][] = $taxvalue;
 								}
 							} else {
@@ -404,43 +411,39 @@ if ( class_exists( 'WP_Importer' ) ) {
 							}
 						}
 					}
-					
+
+					/* Backward compatibility: hook name preserved from original "Really Simple CSV Importer" plugin for migration */
 					/**
 					 * Filter post data.
-					 *
-					 * Backward compatible filter hook for existing implementations.
 					 *
 					 * @param array $post       Post data (required).
 					 * @param bool  $is_update  Whether this is an update operation.
 					 */
 					$post = apply_filters( 'really_simple_csv_importer_save_post', $post, $is_update );
-					
+
+					/* Backward compatibility: hook name preserved from original "Really Simple CSV Importer" plugin for migration */
 					/**
 					 * Filter meta data.
-					 *
-					 * Backward compatible filter hook for existing implementations.
 					 *
 					 * @param array $meta       Meta data (required).
 					 * @param array $post       Post data.
 					 * @param bool  $is_update  Whether this is an update operation.
 					 */
 					$meta = apply_filters( 'really_simple_csv_importer_save_meta', $meta, $post, $is_update );
-					
+
+					/* Backward compatibility: hook name preserved from original "Really Simple CSV Importer" plugin for migration */
 					/**
 					 * Filter taxonomy data.
-					 *
-					 * Backward compatible filter hook for existing implementations.
 					 *
 					 * @param array $tax        Taxonomy data (required).
 					 * @param array $post       Post data.
 					 * @param bool  $is_update  Whether this is an update operation.
 					 */
 					$tax = apply_filters( 'really_simple_csv_importer_save_tax', $tax, $post, $is_update );
-					
+
+					/* Backward compatibility: hook name preserved from original "Really Simple CSV Importer" plugin for migration */
 					/**
 					 * Filter thumbnail URL or path.
-					 *
-					 * Backward compatible filter hook for existing implementations.
 					 *
 					 * @since 1.3
 					 *
@@ -450,30 +453,28 @@ if ( class_exists( 'WP_Importer' ) ) {
 					 */
 					$post_thumbnail = apply_filters( 'really_simple_csv_importer_save_thumbnail', $post_thumbnail, $post, $is_update );
 
+					/* Backward compatibility: hook name preserved from original "Really Simple CSV Importer" plugin for migration */
 					/**
-					 * Option for dry run testing
-					 *
-					 * Backward compatible filter hook for existing implementations.
+					 * Option for dry run testing.
 					 *
 					 * @since 0.5.7
 					 *
 					 * @param bool false
 					 */
 					$dry_run = apply_filters( 'really_simple_csv_importer_dry_run', false );
-					
+
 					if ( ! $error->get_error_codes() && false === $dry_run ) {
-						
+
+						/* Backward compatibility: hook name preserved from original "Really Simple CSV Importer" plugin for migration */
 						/**
 						 * Get Alternative Importer Class name.
-						 *
-						 * Backward compatible filter hook for existing implementations.
 						 *
 						 * @since 0.6
 						 *
 						 * @param string Class name to override Importer class. Default to null (do not override).
 						 */
 						$class = apply_filters( 'really_simple_csv_importer_class', null );
-						
+
 						// save post data
 						if ( $class && class_exists( $class, false ) ) {
 							$importer = new $class();
@@ -481,17 +482,16 @@ if ( class_exists( 'WP_Importer' ) ) {
 						} else {
 							$result = $this->save_post( $post, $meta, $tax, $post_thumbnail, $is_update );
 						}
-						
+
 						if ( $result->isError() ) {
 							$error = $result->getError();
 						} else {
 							$post_object = $result->getPost();
-							
+
 							if ( is_object( $post_object ) ) {
+								/* Backward compatibility: hook name preserved from original "Really Simple CSV Importer" plugin for migration */
 								/**
 								 * Fires after the post imported.
-								 *
-								 * Backward compatible action hook for existing implementations.
 								 *
 								 * @since 1.0
 								 *
@@ -499,28 +499,34 @@ if ( class_exists( 'WP_Importer' ) ) {
 								 */
 								do_action( 'really_simple_csv_importer_post_saved', $post_object );
 							}
-							
-							echo esc_html( sprintf( __( 'Processing "%s" done.', 'really-really-simple-csv-importer' ), $post_title ) );
+
+							echo esc_html(
+								sprintf(
+									/* translators: %s: post title */
+									__( 'Processing "%s" done.', 'really-really-simple-csv-importer' ),
+									$post_title
+								)
+							);
 						}
 					}
-					
+
 					// show error messages
 					foreach ( $error->get_error_messages() as $message ) {
 						echo esc_html( $message ) . '<br>';
 					}
-					
+
 					echo '</li>';
 
 					wp_cache_flush();
 				}
 			}
-			
+
 			echo '</ol>';
 
 			$h->fclose( $handle );
-			
+
 			wp_import_cleanup( $this->id );
-			
+
 			echo '<h3>' . esc_html__( 'All Done.', 'really-really-simple-csv-importer' ) . '</h3>';
 		}
 
@@ -529,12 +535,9 @@ if ( class_exists( 'WP_Importer' ) ) {
 		 */
 		public function dispatch() {
 			$this->header();
-			
-			if ( empty( $_GET['step'] ) ) {
-				$step = 0;
-			} else {
-				$step = (int) $_GET['step'];
-			}
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- step is just a numeric selector, not sensitive data.
+			$step = isset( $_GET['step'] ) ? absint( wp_unslash( $_GET['step'] ) ) : 0;
 
 			switch ( $step ) {
 				case 0:
@@ -549,35 +552,44 @@ if ( class_exists( 'WP_Importer' ) ) {
 					}
 					break;
 			}
-			
+
 			$this->footer();
 		}
-		
+
 	}
 
 	/**
-	 * Initialize the importer
+	 * Initialize the CSV importer and register it with WordPress.
 	 */
-	function really_simple_csv_importer() {
-		load_plugin_textdomain( 'really-really-simple-csv-importer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-		
-		$rs_csv_importer = new RS_CSV_Importer();
-		register_importer( 'csv', __( 'CSV', 'really-really-simple-csv-importer' ), __( 'Import posts, categories, tags, custom fields from simple csv file.', 'really-really-simple-csv-importer' ), array( $rs_csv_importer, 'dispatch' ) );
+	function rrsci_initialize_importer() {
+		$csv_importer = new RRSCI_CSV_Importer();
+		register_importer(
+			'csv',
+			__( 'CSV', 'really-really-simple-csv-importer' ),
+			__( 'Import posts, categories, tags, custom fields from simple csv file.', 'really-really-simple-csv-importer' ),
+			array( $csv_importer, 'dispatch' )
+		);
 	}
-	add_action( 'plugins_loaded', 'really_simple_csv_importer' );
+	add_action( 'plugins_loaded', 'rrsci_initialize_importer' );
 
 	/**
-	 * Enqueue admin scripts
+	 * Enqueue admin scripts for the CSV importer page.
 	 *
 	 * @param string $hook Current admin page hook.
 	 */
-	function really_simple_csv_importer_enqueue( $hook ) {
+	function rrsci_enqueue_scripts( $hook ) {
 		if ( 'admin.php' !== $hook ) {
 			return;
 		}
 
-		wp_enqueue_script( 'really_simple_csv_importer_admin_script', plugin_dir_url( __FILE__ ) . 'auto.js', array(), RRSCI_PLUGIN_VERSION, true );
+		wp_enqueue_script(
+			'rrsci_admin_script',
+			plugin_dir_url( __FILE__ ) . 'auto.js',
+			array(),
+			RRSCI_PLUGIN_VERSION,
+			true
+		);
 	}
-	add_action( 'admin_enqueue_scripts', 'really_simple_csv_importer_enqueue' );
+	add_action( 'admin_enqueue_scripts', 'rrsci_enqueue_scripts' );
 
 } // class_exists( 'WP_Importer' )

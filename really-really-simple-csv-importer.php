@@ -105,6 +105,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 			echo '<p>' . esc_html__( 'Requirements:', 'really-really-simple-csv-importer' ) . '</p>';
 			echo '<ol>';
 			echo '<li>' . esc_html__( 'Select UTF-8 as charset.', 'really-really-simple-csv-importer' ) . '</li>';
+			/* translators: %s: CSV field delimiter character */
 			echo '<li>' . sprintf( esc_html__( 'You must use field delimiter as "%s"', 'really-really-simple-csv-importer' ), esc_html( RRSCI_CSV_Helper::DELIMITER ) ) . '</li>';
 			echo '<li>' . esc_html__( 'You must quote all text cells.', 'really-really-simple-csv-importer' ) . '</li>';
 			echo '</ol>';
@@ -245,6 +246,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 						if ( post_type_exists( $post_type ) ) {
 							$post['post_type'] = $post_type;
 						} else {
+							/* translators: %s: post type slug from CSV */
 							$error->add( 'post_type_exists', sprintf( esc_html__( 'Invalid post type "%s".', 'really-really-simple-csv-importer' ), esc_html( $post_type ) ) );
 						}
 					} else {
@@ -263,7 +265,8 @@ if ( class_exists( 'WP_Importer' ) ) {
 								$post['ID'] = $post_id;
 								$is_update  = true;
 							} else {
-								$error->add( 'post_type_check', sprintf( esc_html__( 'The post type value from your csv file does not match the existing data in your database. post_id: %d, post_type(csv): %s, post_type(db): %s', 'really-really-simple-csv-importer' ), absint( $post_id ), esc_html( $post_type ), esc_html( $post_exist->post_type ) ) );
+								/* translators: %1$d: post ID, %2$s: post type from CSV, %3$s: post type from database */
+								$error->add( 'post_type_check', sprintf( esc_html__( 'The post type value from your csv file does not match the existing data in your database. post_id: %1$d, post_type(csv): %2$s, post_type(db): %3$s', 'really-really-simple-csv-importer' ), absint( $post_id ), esc_html( $post_type ), esc_html( $post_exist->post_type ) ) );
 							}
 						}
 					}

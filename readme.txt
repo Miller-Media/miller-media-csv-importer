@@ -1,6 +1,6 @@
 === Really Really Simple CSV Importer ===
 Contributors: MillerMediaNow, hissy
-Tags: importer, csv, acf, cfs, scf, import, posts, custom-fields
+Tags: csv, importer, import, acf, custom-fields
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 8.1

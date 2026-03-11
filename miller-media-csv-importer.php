@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Really Really Simple CSV Importer
- * Plugin URI: https://github.com/Miller-Media/really-really-simple-csv-importer
+ * Plugin Name: Miller Media CSV Importer
+ * Plugin URI: https://github.com/Miller-Media/miller-media-csv-importer
  * Description: Import posts, pages, custom post types, categories, tags, and custom fields from a simple CSV file. Based on Really Simple CSV Importer by Takuro Hishikawa.
  * Author: Miller Media
  * Author URI: https://mattmiller.ai
- * Text Domain: really-really-simple-csv-importer
+ * Text Domain: miller-media-csv-importer
  * Domain Path: /languages
  * Version: 2.0.0
  * Requires at least: 5.0
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'RRSCI_PLUGIN_VERSION', '2.0.0' );
+define( 'MMCSV_PLUGIN_VERSION', '2.0.0' );
 
 if ( ! defined( 'WP_LOAD_IMPORTERS' ) ) {
 	return;
@@ -36,22 +36,22 @@ if ( ! class_exists( 'WP_Importer' ) ) {
 }
 
 // Load Helpers
-require dirname( __FILE__ ) . '/class-rrsci-csv-helper.php';
-require dirname( __FILE__ ) . '/class-rrsci-import-post-helper.php';
+require dirname( __FILE__ ) . '/class-mmcsv-csv-helper.php';
+require dirname( __FILE__ ) . '/class-mmcsv-import-post-helper.php';
 
 /**
  * CSV Importer
  *
- * @package Really Really Simple CSV Importer
+ * @package Miller Media CSV Importer
  * @subpackage Importer
  */
 if ( class_exists( 'WP_Importer' ) ) {
 	/**
-	 * RRSCI_CSV_Importer class.
+	 * MMCSV_CSV_Importer class.
 	 *
 	 * Extends WP_Importer to provide CSV import functionality.
 	 */
-	class RRSCI_CSV_Importer extends WP_Importer {
+	class MMCSV_CSV_Importer extends WP_Importer {
 
 		/**
 		 * Sheet columns
@@ -86,7 +86,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 		 */
 		public function header() {
 			echo '<div class="wrap">';
-			echo '<h2>' . esc_html__( 'Import CSV', 'really-really-simple-csv-importer' ) . '</h2>';
+			echo '<h2>' . esc_html__( 'Import CSV', 'miller-media-csv-importer' ) . '</h2>';
 		}
 
 		/**
@@ -100,29 +100,29 @@ if ( class_exists( 'WP_Importer' ) ) {
 		 * Step 1 - Display import form
 		 */
 		public function greet() {
-			echo '<p>' . esc_html__( 'Choose a CSV (.csv) file to upload, then click Upload file and import.', 'really-really-simple-csv-importer' ) . '</p>';
-			echo '<p>' . esc_html__( 'Excel-style CSV file is unconventional and not recommended. LibreOffice has enough export options and recommended for most users.', 'really-really-simple-csv-importer' ) . '</p>';
-			echo '<p>' . esc_html__( 'Requirements:', 'really-really-simple-csv-importer' ) . '</p>';
+			echo '<p>' . esc_html__( 'Choose a CSV (.csv) file to upload, then click Upload file and import.', 'miller-media-csv-importer' ) . '</p>';
+			echo '<p>' . esc_html__( 'Excel-style CSV file is unconventional and not recommended. LibreOffice has enough export options and recommended for most users.', 'miller-media-csv-importer' ) . '</p>';
+			echo '<p>' . esc_html__( 'Requirements:', 'miller-media-csv-importer' ) . '</p>';
 			echo '<ol>';
-			echo '<li>' . esc_html__( 'Select UTF-8 as charset.', 'really-really-simple-csv-importer' ) . '</li>';
+			echo '<li>' . esc_html__( 'Select UTF-8 as charset.', 'miller-media-csv-importer' ) . '</li>';
 			/* translators: %s: CSV field delimiter character */
-			echo '<li>' . sprintf( esc_html__( 'You must use field delimiter as "%s"', 'really-really-simple-csv-importer' ), esc_html( RRSCI_CSV_Helper::DELIMITER ) ) . '</li>';
-			echo '<li>' . esc_html__( 'You must quote all text cells.', 'really-really-simple-csv-importer' ) . '</li>';
+			echo '<li>' . sprintf( esc_html__( 'You must use field delimiter as "%s"', 'miller-media-csv-importer' ), esc_html( MMCSV_CSV_Helper::DELIMITER ) ) . '</li>';
+			echo '<li>' . esc_html__( 'You must quote all text cells.', 'miller-media-csv-importer' ) . '</li>';
 			echo '</ol>';
-			echo '<p>' . esc_html__( 'Download example CSV files:', 'really-really-simple-csv-importer' );
-			echo ' <a href="' . esc_url( plugin_dir_url( __FILE__ ) . 'sample/sample.csv' ) . '">' . esc_html__( 'csv', 'really-really-simple-csv-importer' ) . '</a>,';
-			echo ' <a href="' . esc_url( plugin_dir_url( __FILE__ ) . 'sample/sample.ods' ) . '">' . esc_html__( 'ods', 'really-really-simple-csv-importer' ) . '</a>';
-			echo ' ' . esc_html__( '(OpenDocument Spreadsheet file format for LibreOffice. Please export as csv before import)', 'really-really-simple-csv-importer' );
+			echo '<p>' . esc_html__( 'Download example CSV files:', 'miller-media-csv-importer' );
+			echo ' <a href="' . esc_url( plugin_dir_url( __FILE__ ) . 'sample/sample.csv' ) . '">' . esc_html__( 'csv', 'miller-media-csv-importer' ) . '</a>,';
+			echo ' <a href="' . esc_url( plugin_dir_url( __FILE__ ) . 'sample/sample.ods' ) . '">' . esc_html__( 'ods', 'miller-media-csv-importer' ) . '</a>';
+			echo ' ' . esc_html__( '(OpenDocument Spreadsheet file format for LibreOffice. Please export as csv before import)', 'miller-media-csv-importer' );
 			echo '</p>';
 			?>
 			<div id="really-simple-csv-importer-form-options" style="display: none;">
-				<h2><?php esc_html_e( 'Import Options', 'really-really-simple-csv-importer' ); ?></h2>
-				<p><?php esc_html_e( 'Replace by post title', 'really-really-simple-csv-importer' ); ?></p>
+				<h2><?php esc_html_e( 'Import Options', 'miller-media-csv-importer' ); ?></h2>
+				<p><?php esc_html_e( 'Replace by post title', 'miller-media-csv-importer' ); ?></p>
 				<label>
-					<input type="radio" name="replace-by-title" value="0" checked="checked" /><?php esc_html_e( 'Disable', 'really-really-simple-csv-importer' ); ?>
+					<input type="radio" name="replace-by-title" value="0" checked="checked" /><?php esc_html_e( 'Disable', 'miller-media-csv-importer' ); ?>
 				</label>
 				<label>
-					<input type="radio" name="replace-by-title" value="1" /><?php esc_html_e( 'Enable', 'really-really-simple-csv-importer' ); ?>
+					<input type="radio" name="replace-by-title" value="1" /><?php esc_html_e( 'Enable', 'miller-media-csv-importer' ); ?>
 				</label>
 			</div>
 			<?php
@@ -136,14 +136,14 @@ if ( class_exists( 'WP_Importer' ) ) {
 			$file = wp_import_handle_upload();
 
 			if ( isset( $file['error'] ) ) {
-				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'really-really-simple-csv-importer' ) . '</strong><br />';
+				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'miller-media-csv-importer' ) . '</strong><br />';
 				echo esc_html( $file['error'] ) . '</p>';
 				return false;
 			} elseif ( ! file_exists( $file['file'] ) ) {
-				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'really-really-simple-csv-importer' ) . '</strong><br />';
+				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'miller-media-csv-importer' ) . '</strong><br />';
 				printf(
 					/* translators: %s: file path */
-					esc_html__( 'The export file could not be found at %s. It is likely that this was caused by a permissions problem.', 'really-really-simple-csv-importer' ),
+					esc_html__( 'The export file could not be found at %s. It is likely that this was caused by a permissions problem.', 'miller-media-csv-importer' ),
 					'<code>' . esc_html( $file['file'] ) . '</code>'
 				);
 				echo '</p>';
@@ -159,14 +159,14 @@ if ( class_exists( 'WP_Importer' ) ) {
 		}
 
 		/**
-		 * Insert post and postmeta using `RRSCI_Import_Post_Helper` class.
+		 * Insert post and postmeta using `MMCSV_Import_Post_Helper` class.
 		 *
 		 * @param array  $post      Post data.
 		 * @param array  $meta      Meta data.
 		 * @param array  $terms     Terms data.
 		 * @param string $thumbnail The uri or path of thumbnail image.
 		 * @param bool   $is_update Whether this is an update operation.
-		 * @return RRSCI_Import_Post_Helper
+		 * @return MMCSV_Import_Post_Helper
 		 */
 		public function save_post( $post, $meta, $terms, $thumbnail, $is_update ) {
 
@@ -184,10 +184,10 @@ if ( class_exists( 'WP_Importer' ) ) {
 
 			// Add or update the post
 			if ( $is_update ) {
-				$h = RRSCI_Import_Post_Helper::getByID( $post['ID'] );
+				$h = MMCSV_Import_Post_Helper::getByID( $post['ID'] );
 				$h->update( $post );
 			} else {
-				$h = RRSCI_Import_Post_Helper::add( $post );
+				$h = MMCSV_Import_Post_Helper::add( $post );
 			}
 
 			// Set post tags
@@ -215,11 +215,11 @@ if ( class_exists( 'WP_Importer' ) ) {
 		 * Process parse csv and insert posts
 		 */
 		public function process_posts() {
-			$h = new RRSCI_CSV_Helper();
+			$h = new MMCSV_CSV_Helper();
 
 			$handle = $h->fopen( $this->file, 'r' );
 			if ( false === $handle ) {
-				echo '<p><strong>' . esc_html__( 'Failed to open file.', 'really-really-simple-csv-importer' ) . '</strong></p>';
+				echo '<p><strong>' . esc_html__( 'Failed to open file.', 'miller-media-csv-importer' ) . '</strong></p>';
 				wp_import_cleanup( $this->id );
 				return false;
 			}
@@ -247,10 +247,10 @@ if ( class_exists( 'WP_Importer' ) ) {
 							$post['post_type'] = $post_type;
 						} else {
 							/* translators: %s: post type slug from CSV */
-							$error->add( 'post_type_exists', sprintf( esc_html__( 'Invalid post type "%s".', 'really-really-simple-csv-importer' ), esc_html( $post_type ) ) );
+							$error->add( 'post_type_exists', sprintf( esc_html__( 'Invalid post type "%s".', 'miller-media-csv-importer' ), esc_html( $post_type ) ) );
 						}
 					} else {
-						echo esc_html__( 'Note: Please include post_type value if that is possible.', 'really-really-simple-csv-importer' ) . '<br>';
+						echo esc_html__( 'Note: Please include post_type value if that is possible.', 'miller-media-csv-importer' ) . '<br>';
 					}
 
 					// (int) post id
@@ -266,7 +266,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 								$is_update  = true;
 							} else {
 								/* translators: %1$d: post ID, %2$s: post type from CSV, %3$s: post type from database */
-								$error->add( 'post_type_check', sprintf( esc_html__( 'The post type value from your csv file does not match the existing data in your database. post_id: %1$d, post_type(csv): %2$s, post_type(db): %3$s', 'really-really-simple-csv-importer' ), absint( $post_id ), esc_html( $post_type ), esc_html( $post_exist->post_type ) ) );
+								$error->add( 'post_type_check', sprintf( esc_html__( 'The post type value from your csv file does not match the existing data in your database. post_id: %1$d, post_type(csv): %2$s, post_type(db): %3$s', 'miller-media-csv-importer' ), absint( $post_id ), esc_html( $post_type ), esc_html( $post_exist->post_type ) ) );
 							}
 						}
 					}
@@ -281,7 +281,20 @@ if ( class_exists( 'WP_Importer' ) ) {
 							if ( ! $post_type ) {
 								$post_type = 'post';
 							}
-							$existing_post = get_page_by_title( $post_title, OBJECT, $post_type );
+							$query = new WP_Query(
+								array(
+									'post_type'              => $post_type,
+									'title'                  => $post_title,
+									'posts_per_page'         => 1,
+									'no_found_rows'          => true,
+									'ignore_sticky_posts'    => true,
+									'update_post_term_cache' => false,
+									'update_post_meta_cache' => false,
+									'orderby'                => 'post_date ID',
+									'order'                  => 'ASC',
+								)
+							);
+							$existing_post = ! empty( $query->post ) ? $query->post : null;
 
 							if ( ! is_null( $existing_post ) ) {
 								$post['ID'] = $existing_post->ID;
@@ -506,7 +519,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 							echo esc_html(
 								sprintf(
 									/* translators: %s: post title */
-									__( 'Processing "%s" done.', 'really-really-simple-csv-importer' ),
+									__( 'Processing "%s" done.', 'miller-media-csv-importer' ),
 									$post_title
 								)
 							);
@@ -530,7 +543,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 
 			wp_import_cleanup( $this->id );
 
-			echo '<h3>' . esc_html__( 'All Done.', 'really-really-simple-csv-importer' ) . '</h3>';
+			echo '<h3>' . esc_html__( 'All Done.', 'miller-media-csv-importer' ) . '</h3>';
 		}
 
 		/**
@@ -564,35 +577,35 @@ if ( class_exists( 'WP_Importer' ) ) {
 	/**
 	 * Initialize the CSV importer and register it with WordPress.
 	 */
-	function rrsci_initialize_importer() {
-		$csv_importer = new RRSCI_CSV_Importer();
+	function mmcsv_initialize_importer() {
+		$csv_importer = new MMCSV_CSV_Importer();
 		register_importer(
 			'csv',
-			__( 'CSV', 'really-really-simple-csv-importer' ),
-			__( 'Import posts, categories, tags, custom fields from simple csv file.', 'really-really-simple-csv-importer' ),
+			__( 'CSV', 'miller-media-csv-importer' ),
+			__( 'Import posts, categories, tags, custom fields from simple csv file.', 'miller-media-csv-importer' ),
 			array( $csv_importer, 'dispatch' )
 		);
 	}
-	add_action( 'plugins_loaded', 'rrsci_initialize_importer' );
+	add_action( 'plugins_loaded', 'mmcsv_initialize_importer' );
 
 	/**
 	 * Enqueue admin scripts for the CSV importer page.
 	 *
 	 * @param string $hook Current admin page hook.
 	 */
-	function rrsci_enqueue_scripts( $hook ) {
+	function mmcsv_enqueue_scripts( $hook ) {
 		if ( 'admin.php' !== $hook ) {
 			return;
 		}
 
 		wp_enqueue_script(
-			'rrsci_admin_script',
+			'mmcsv_admin_script',
 			plugin_dir_url( __FILE__ ) . 'auto.js',
 			array(),
-			RRSCI_PLUGIN_VERSION,
+			MMCSV_PLUGIN_VERSION,
 			true
 		);
 	}
-	add_action( 'admin_enqueue_scripts', 'rrsci_enqueue_scripts' );
+	add_action( 'admin_enqueue_scripts', 'mmcsv_enqueue_scripts' );
 
 } // class_exists( 'WP_Importer' )

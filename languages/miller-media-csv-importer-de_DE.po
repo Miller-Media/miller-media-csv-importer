@@ -2,21 +2,21 @@
 # This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Really Really Simple CSV Importer\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/really-really-simple-csv-importer\n"
+"Project-Id-Version: Miller Media CSV Importer\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/miller-media-csv-importer\n"
 "POT-Creation-Date: 2015-02-01 05:07:15+00:00\n"
 "PO-Revision-Date: 2026-02-12 18:38+0000\n"
 "Last-Translator: Claude (AI)\n"
-"Language-Team: Portuguese (Brazil)\n"
-"Language: pt_BR\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: class-rscsv_import_post_helper.php:73
 msgid "Provided Post ID not found."
-msgstr "ID de publicação fornecido não encontrado."
+msgstr "Angegebene Beitrags-ID nicht gefunden."
 
 #: class-rscsv_import_post_helper.php:179
 #: class-rscsv_import_post_helper.php:199
@@ -24,43 +24,43 @@ msgstr "ID de publicação fornecido não encontrado."
 #: class-rscsv_import_post_helper.php:235
 #: class-rscsv_import_post_helper.php:251
 msgid "WP_Post object is not set."
-msgstr "Objeto WP_Post não está definido."
+msgstr "WP_Post-Objekt ist nicht gesetzt."
 
 #: class-rscsv_import_post_helper.php:364
 msgid "Could not get remote file."
-msgstr "Não foi possível obter o arquivo remoto."
+msgstr "Remote-Datei konnte nicht abgerufen werden."
 
 #: rs-csv-importer.php:47
 msgid "Import CSV"
-msgstr "Importar CSV"
+msgstr "CSV importieren"
 
 #: rs-csv-importer.php:57
 msgid "Choose a CSV (.csv) file to upload, then click Upload file and import."
-msgstr "Escolha um arquivo CSV (.csv) para fazer upload e clique em Fazer upload do arquivo e importar."
+msgstr "Wählen Sie eine CSV-Datei (.csv) zum Hochladen aus und klicken Sie dann auf Datei hochladen und importieren."
 
 #: rs-csv-importer.php:58
 msgid "Excel-style CSV file is unconventional and not recommended. LibreOffice has enough export options and recommended for most users."
-msgstr "Arquivo CSV no estilo Excel não é convencional e não é recomendado. O LibreOffice tem opções de exportação suficientes e é recomendado para a maioria dos usuários."
+msgstr "CSV-Datei im Excel-Stil ist unkonventionell und wird nicht empfohlen. LibreOffice bietet genügend Exportoptionen und wird für die meisten Benutzer empfohlen."
 
 #: rs-csv-importer.php:59
 msgid "Requirements:"
-msgstr "Requisitos:"
+msgstr "Anforderungen:"
 
 #: rs-csv-importer.php:61
 msgid "Select UTF-8 as charset."
-msgstr "Selecione UTF-8 como conjunto de caracteres."
+msgstr "Wählen Sie UTF-8 als Zeichensatz."
 
 #: rs-csv-importer.php:62
 msgid "You must use field delimiter as \"%s\""
-msgstr "Você deve usar \"%s\" como delimitador de campo"
+msgstr "Sie müssen \"%s\" als Feldtrennzeichen verwenden"
 
 #: rs-csv-importer.php:63
 msgid "You must quote all text cells."
-msgstr "Você deve colocar aspas em todas as células de texto."
+msgstr "Sie müssen alle Textzellen in Anführungszeichen setzen."
 
 #: rs-csv-importer.php:65
 msgid "Download example CSV files:"
-msgstr "Baixar arquivos CSV de exemplo:"
+msgstr "Beispiel-CSV-Dateien herunterladen:"
 
 #: rs-csv-importer.php:66
 msgid "csv"
@@ -72,39 +72,39 @@ msgstr "ods"
 
 #: rs-csv-importer.php:68
 msgid "(OpenDocument Spreadsheet file format for LibreOffice. Please export as csv before import)"
-msgstr "(Formato de arquivo de planilha OpenDocument para LibreOffice. Por favor, exporte como csv antes de importar)"
+msgstr "(OpenDocument-Tabellenkalkulations-Dateiformat für LibreOffice. Bitte vor dem Import als CSV exportieren)"
 
 #: rs-csv-importer.php:78 rs-csv-importer.php:82
 msgid "Sorry, there has been an error."
-msgstr "Desculpe, ocorreu um erro."
+msgstr "Entschuldigung, es ist ein Fehler aufgetreten."
 
 #: rs-csv-importer.php:83
 msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
-msgstr "O arquivo de exportação não pôde ser encontrado em <code>%s</code>. É provável que isso tenha sido causado por um problema de permissões."
+msgstr "Die Exportdatei konnte unter <code>%s</code> nicht gefunden werden. Dies wurde wahrscheinlich durch ein Berechtigungsproblem verursacht."
 
 #: rs-csv-importer.php:148
 msgid "Failed to open file."
-msgstr "Falha ao abrir arquivo."
+msgstr "Fehler beim Öffnen der Datei."
 
 #: rs-csv-importer.php:174
 msgid "Invalid post type \"%s\"."
-msgstr "Tipo de publicação inválido \"%s\"."
+msgstr "Ungültiger Beitragstyp \"%s\"."
 
 #: rs-csv-importer.php:177
 msgid "Note: Please include post_type value if that is possible."
-msgstr "Nota: Inclua o valor post_type se possível."
+msgstr "Hinweis: Bitte geben Sie den post_type-Wert an, wenn möglich."
 
 #: rs-csv-importer.php:192
 msgid "The post type value from your csv file does not match the existing data in your database. post_id: %d, post_type(csv): %s, post_type(db): %s"
-msgstr "O valor do tipo de publicação do seu arquivo csv não corresponde aos dados existentes no seu banco de dados. post_id: %d, post_type(csv): %s, post_type(db): %s"
+msgstr "Der Beitragstyp-Wert aus Ihrer CSV-Datei stimmt nicht mit den vorhandenen Daten in Ihrer Datenbank überein. post_id: %d, post_type(csv): %s, post_type(db): %s"
 
 #: rs-csv-importer.php:367
 msgid "Processing \"%s\" done."
-msgstr "Processamento de \"%s\" concluído."
+msgstr "Verarbeitung von \"%s\" abgeschlossen."
 
 #: rs-csv-importer.php:386
 msgid "All Done."
-msgstr "Tudo pronto."
+msgstr "Alles erledigt."
 
 #: rs-csv-importer.php:419
 msgid "CSV"
@@ -112,4 +112,4 @@ msgstr "CSV"
 
 #: rs-csv-importer.php:419
 msgid "Import posts, categories, tags, custom fields from simple csv file."
-msgstr "Importe publicações, categorias, tags, campos personalizados de um arquivo csv simples."
+msgstr "Importieren Sie Beiträge, Kategorien, Tags und benutzerdefinierte Felder aus einer einfachen CSV-Datei."

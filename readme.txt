@@ -1,4 +1,4 @@
-=== Really Really Simple CSV Importer ===
+=== Miller Media CSV Importer ===
 Contributors: MillerMediaNow, hissy
 Tags: csv, importer, import, acf, custom-fields
 Requires at least: 5.0
@@ -8,13 +8,13 @@ Stable tag: 2.0.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Import posts, pages, custom post types, categories, tags, and custom fields from a simple CSV file. Maintained fork with PHP 8.1+ support.
+Import posts, pages, custom post types, categories, tags, and custom fields from a simple CSV file.
 
 == Description ==
 
 **This plugin is a maintained fork of [Really Simple CSV Importer](https://wordpress.org/plugins/really-simple-csv-importer/) originally created by [Takuro Hishikawa](https://github.com/hissy). We are grateful for his work and his blessing to continue this project.**
 
-Really Really Simple CSV Importer is a powerful yet simple CSV import plugin for WordPress, perfect for developers and site administrators who need reliable bulk import functionality.
+Miller Media CSV Importer is a maintained fork of [Really Simple CSV Importer](https://wordpress.org/plugins/really-simple-csv-importer/), providing a powerful yet simple CSV import plugin for WordPress, perfect for developers and site administrators who need reliable bulk import functionality.
 
 = Features =
 
@@ -27,13 +27,13 @@ Really Really Simple CSV Importer is a powerful yet simple CSV import plugin for
 * Custom Taxonomy support
 * Custom Post Type support
 * Filter hook for dry-run-testing
-* [Filter hooks for customized csv data importing](https://wordpress.org/plugins/really-really-simple-csv-importer/other_notes/) to database
+* [Filter hooks for customized csv data importing](https://wordpress.org/plugins/miller-media-csv-importer/other_notes/) to database
 * Action hook for update post data after importing to database
 * PHP 8.1+ compatible
 * Security hardened with proper sanitization and escaping
 * WordPress 6.9+ compatible
 
-You can get example CSV files in `/wp-content/plugins/really-really-simple-csv-importer/sample` directory.
+You can get example CSV files in `/wp-content/plugins/miller-media-csv-importer/sample` directory.
 
 = Available column names and values: =
 * `ID` or `post_id`: (int) post id.
@@ -70,7 +70,7 @@ If advanced custom field key is exists, importer will trying to use [update_fiel
 How to find advanced custom field key: [Finding the field key](http://www.advancedcustomfields.com/resources/functions/update_field/#finding-the%20field%20key)
 
 = Official public repository =
-Add star and contribute on [GitHub](https://github.com/Miller-Media/really-really-simple-csv-importer)!
+Add star and contribute on [GitHub](https://github.com/Miller-Media/miller-media-csv-importer)!
 
 Original repository by Takuro Hishikawa: [GitHub](https://github.com/hissy/rs-csv-importer)
 
@@ -389,8 +389,9 @@ Example: Update row based on a custom field ID/key match (Download from [gist](h
 == Changelog ==
 
 = 2.0.0 =
-* **MAJOR UPDATE**: Rebrand to Really Really Simple CSV Importer
+* **MAJOR UPDATE**: Renamed from "Really Really Simple CSV Importer" to "Miller Media CSV Importer"
 * **PHP 8.1+ compatibility**: Fixed all deprecated features and warnings
+  * Replaced deprecated `get_page_by_title()` with WP_Query
   * Fixed dynamic property declarations
   * Updated date() to gmdate() for proper timezone handling
   * Added proper type checking and null safety
@@ -407,8 +408,8 @@ Example: Update row based on a custom field ID/key match (Download from [gist](h
   * Added ABSPATH security checks
   * Better code organization and readability
 * **Backward compatibility**: All filter hooks and action hooks maintained for existing implementations
-* **Text domain updated** to `really-really-simple-csv-importer`
-* **New**: Added plugin version constant `RRSCI_PLUGIN_VERSION`
+* **Text domain updated** to `miller-media-csv-importer`
+* **New**: Added plugin version constant `MMCSV_PLUGIN_VERSION`
 * **Minimum requirements updated**:
   * WordPress 5.0+
   * PHP 8.1+

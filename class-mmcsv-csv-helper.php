@@ -2,7 +2,7 @@
 /**
  * A helper class for getting data from CSV files.
  *
- * @package Really Really Simple CSV Importer
+ * @package Miller Media CSV Importer
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,9 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * RRSCI_CSV_Helper class.
+ * MMCSV_CSV_Helper class.
  */
-class RRSCI_CSV_Helper {
+class MMCSV_CSV_Helper {
 
 	/**
 	 * CSV delimiter

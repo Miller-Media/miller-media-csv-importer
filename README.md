@@ -1,4 +1,4 @@
-# Really Really Simple CSV Importer
+# Miller Media CSV Importer
 
 [![WordPress Version](https://img.shields.io/badge/WordPress-5.0%2B-blue)](https://wordpress.org/)
 [![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-777BB4)](https://www.php.net/)
@@ -12,7 +12,7 @@ A maintained fork of [Really Simple CSV Importer](https://wordpress.org/plugins/
 
 ## Description
 
-Really Really Simple CSV Importer is a powerful yet simple CSV import plugin for WordPress, perfect for developers and site administrators who need reliable bulk import functionality.
+Miller Media CSV Importer is a powerful yet simple CSV import plugin for WordPress, perfect for developers and site administrators who need reliable bulk import functionality.
 
 **This plugin is a maintained fork created with the blessing of the original author, [Takuro Hishikawa](https://github.com/hissy). We are grateful for his excellent work and for allowing us to continue this project.**
 
@@ -50,7 +50,7 @@ The original Really Simple CSV Importer was last updated in 2017 and is incompat
 ### From WordPress.org
 
 1. Go to **Plugins → Add New** in your WordPress admin
-2. Search for "Really Really Simple CSV Importer"
+2. Search for "Miller Media CSV Importer"
 3. Click **Install Now** and then **Activate**
 
 ### Manual Installation
@@ -298,7 +298,7 @@ add_action( 'really_simple_csv_importer_post_saved', function( $post_object ) {
 
 ### CSV Examples in `/sample` Directory
 
-The plugin includes sample CSV and ODS files demonstrating various import scenarios:
+The plugin includes sample CSV files demonstrating various import scenarios:
 
 - `sample.csv` - Basic post import
 - `custom_fields.csv` - Custom field import
@@ -401,7 +401,7 @@ We welcome contributions! Please:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-**Bug Reports:** Please use [GitHub Issues](https://github.com/Miller-Media/really-really-simple-csv-importer/issues).
+**Bug Reports:** Please use [GitHub Issues](https://github.com/Miller-Media/miller-media-csv-importer/issues).
 
 ---
 
@@ -448,8 +448,8 @@ Original cover banner designed by [@luchino__](http://uwasora.com/)
 
 ## Links
 
-- [WordPress.org Plugin Page](https://wordpress.org/plugins/really-really-simple-csv-importer/)
-- [GitHub Repository](https://github.com/Miller-Media/really-really-simple-csv-importer)
+- [WordPress.org Plugin Page](https://wordpress.org/plugins/miller-media-csv-importer/)
+- [GitHub Repository](https://github.com/Miller-Media/miller-media-csv-importer)
 - [Original Plugin by Takuro Hishikawa](https://github.com/hissy/rs-csv-importer)
 - [Miller Media](https://www.millermedia.io)
 

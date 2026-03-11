@@ -341,7 +341,7 @@ CSV format: `"http://example.com/img1.jpg|http://example.com/img2.jpg"`
 
 ### Dry Run Testing
 
-Use the [Really Simple CSV Importer Debugger](https://gist.github.com/hissy/7175656) add-on to preview imports without making database changes.
+Use the [Really Simple CSV Importer Debugger](https://gist.github.com/hissy/7175656) add-on (created for the original plugin by Takuro Hishikawa) to preview imports without making database changes. It works with Miller Media CSV Importer since all filter hooks are maintained.
 
 ### Common Issues
 

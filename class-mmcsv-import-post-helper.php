@@ -2,7 +2,7 @@
 /**
  * A helper class for inserting or updating post data.
  *
- * @package Really Really Simple CSV Importer
+ * @package Miller Media CSV Importer
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,9 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * RRSCI_Import_Post_Helper class.
+ * MMCSV_Import_Post_Helper class.
  */
-class RRSCI_Import_Post_Helper {
+class MMCSV_Import_Post_Helper {
 
 	/**
 	 * Custom Field Suite prefix
@@ -85,7 +85,7 @@ class RRSCI_Import_Post_Helper {
 		if ( is_object( $post ) ) {
 			$this->post = $post;
 		} else {
-			$this->addError( 'post_id_not_found', __( 'Provided Post ID not found.', 'really-really-simple-csv-importer' ) );
+			$this->addError( 'post_id_not_found', __( 'Provided Post ID not found.', 'miller-media-csv-importer' ) );
 		}
 	}
 
@@ -102,10 +102,10 @@ class RRSCI_Import_Post_Helper {
 	 * Get object by post id.
 	 *
 	 * @param int $post_id Post ID.
-	 * @return RRSCI_Import_Post_Helper
+	 * @return MMCSV_Import_Post_Helper
 	 */
 	public static function getByID( $post_id ) {
-		$object = new RRSCI_Import_Post_Helper();
+		$object = new MMCSV_Import_Post_Helper();
 		$object->setPost( $post_id );
 		return $object;
 	}
@@ -114,10 +114,10 @@ class RRSCI_Import_Post_Helper {
 	 * Add a post
 	 *
 	 * @param array $data An associative array of the post data.
-	 * @return RRSCI_Import_Post_Helper
+	 * @return MMCSV_Import_Post_Helper
 	 */
 	public static function add( $data ) {
-		$object = new RRSCI_Import_Post_Helper();
+		$object = new MMCSV_Import_Post_Helper();
 
 		if ( isset( $data['post_type'] ) && 'attachment' === $data['post_type'] ) {
 			$post_id = $object->addMediaFile( $data['media_file'], $data );
@@ -206,7 +206,7 @@ class RRSCI_Import_Post_Helper {
 		if ( $post instanceof WP_Post ) {
 			update_post_meta( $post->ID, sanitize_key( $key ), $value );
 		} else {
-			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
+			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'miller-media-csv-importer' ) );
 		}
 	}
 
@@ -225,7 +225,7 @@ class RRSCI_Import_Post_Helper {
 				$this->updateMeta( $key, $value );
 			}
 		} else {
-			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
+			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'miller-media-csv-importer' ) );
 		}
 	}
 
@@ -246,7 +246,7 @@ class RRSCI_Import_Post_Helper {
 				$this->updateMeta( $key, $value );
 			}
 		} else {
-			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
+			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'miller-media-csv-importer' ) );
 		}
 	}
 
@@ -271,7 +271,7 @@ class RRSCI_Import_Post_Helper {
 				}
 			}
 		} else {
-			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
+			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'miller-media-csv-importer' ) );
 		}
 	}
 
@@ -285,7 +285,7 @@ class RRSCI_Import_Post_Helper {
 		if ( $post instanceof WP_Post ) {
 			wp_set_post_tags( $post->ID, $tags );
 		} else {
-			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
+			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'miller-media-csv-importer' ) );
 		}
 	}
 
@@ -300,7 +300,7 @@ class RRSCI_Import_Post_Helper {
 		if ( $post instanceof WP_Post ) {
 			wp_set_object_terms( $post->ID, $terms, $taxonomy );
 		} else {
-			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
+			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'miller-media-csv-importer' ) );
 		}
 	}
 
@@ -405,7 +405,7 @@ class RRSCI_Import_Post_Helper {
 		if ( $post instanceof WP_Post ) {
 			update_attached_file( $post->ID, $value );
 		} else {
-			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'really-really-simple-csv-importer' ) );
+			$this->addError( 'post_is_not_set', __( 'WP_Post object is not set.', 'miller-media-csv-importer' ) );
 		}
 	}
 
@@ -434,7 +434,7 @@ class RRSCI_Import_Post_Helper {
 				if ( $body && $wp_filesystem->put_contents( $filepath, $body, FS_CHMOD_FILE ) ) {
 					return $filepath;
 				} else {
-					$this->addError( 'remote_get_failed', __( 'Could not get remote file.', 'really-really-simple-csv-importer' ) );
+					$this->addError( 'remote_get_failed', __( 'Could not get remote file.', 'miller-media-csv-importer' ) );
 				}
 			} elseif ( is_wp_error( $response ) ) {
 				$this->addError( $response->get_error_code(), $response->get_error_message() );

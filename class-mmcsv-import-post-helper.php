@@ -45,7 +45,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param string     $message Error message.
 	 * @param mixed      $data    Optional. Error data.
 	 */
-	public function addError( $code, $message, $data = '' ) {
+	public function addError( $code, $message, $data = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		if ( ! $this->isError() ) {
 			$e           = new WP_Error();
 			$this->error = $e;
@@ -58,7 +58,7 @@ class MMCSV_Import_Post_Helper {
 	 *
 	 * @return WP_Error
 	 */
-	public function getError() {
+	public function getError() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		if ( ! $this->isError() ) {
 			$e = new WP_Error();
 			return $e;
@@ -71,7 +71,7 @@ class MMCSV_Import_Post_Helper {
 	 *
 	 * @return bool
 	 */
-	public function isError() {
+	public function isError() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		return is_wp_error( $this->error );
 	}
 
@@ -80,7 +80,7 @@ class MMCSV_Import_Post_Helper {
 	 *
 	 * @param int $post_id Post ID.
 	 */
-	protected function setPost( $post_id ) {
+	protected function setPost( $post_id ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = get_post( $post_id );
 		if ( is_object( $post ) ) {
 			$this->post = $post;
@@ -94,7 +94,7 @@ class MMCSV_Import_Post_Helper {
 	 *
 	 * @return WP_Post|null
 	 */
-	public function getPost() {
+	public function getPost() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		return $this->post;
 	}
 
@@ -104,7 +104,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param int $post_id Post ID.
 	 * @return MMCSV_Import_Post_Helper
 	 */
-	public static function getByID( $post_id ) {
+	public static function getByID( $post_id ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$object = new MMCSV_Import_Post_Helper();
 		$object->setPost( $post_id );
 		return $object;
@@ -159,7 +159,7 @@ class MMCSV_Import_Post_Helper {
 	 *
 	 * @param array $data An associative array of metadata.
 	 */
-	public function setMeta( $data ) {
+	public function setMeta( $data ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$scf_array = array();
 		foreach ( $data as $key => $value ) {
 			$is_cfs = 0;
@@ -169,22 +169,20 @@ class MMCSV_Import_Post_Helper {
 				$this->cfsSave( substr( $key, strlen( self::CFS_PREFIX ) ), $value );
 				$is_cfs = 1;
 			} elseif ( strpos( $key, self::SCF_PREFIX ) === 0 ) {
-				$scf_key              = substr( $key, strlen( self::SCF_PREFIX ) );
+				$scf_key                 = substr( $key, strlen( self::SCF_PREFIX ) );
 				$scf_array[ $scf_key ][] = $value;
-				$is_scf               = 1;
-			} else {
-				if ( function_exists( 'get_field_object' ) ) {
-					if ( strpos( $key, 'field_' ) === 0 ) {
-						$fobj = get_field_object( $key );
-						if ( is_array( $fobj ) && isset( $fobj['key'] ) && $fobj['key'] === $key ) {
-							$post = get_post( $fobj['parent'] );
-							if ( $post && 'acf-field' === $post->post_type ) {
-								$this->acfUpdateField( $post->post_name, array( $key => $value ) );
-							} else {
-								$this->acfUpdateField( $key, $value );
-							}
-							$is_acf = 1;
+				$is_scf                  = 1;
+			} elseif ( function_exists( 'get_field_object' ) ) {
+				if ( strpos( $key, 'field_' ) === 0 ) {
+					$fobj = get_field_object( $key );
+					if ( is_array( $fobj ) && isset( $fobj['key'] ) && $fobj['key'] === $key ) {
+						$post = get_post( $fobj['parent'] );
+						if ( $post && 'acf-field' === $post->post_type ) {
+							$this->acfUpdateField( $post->post_name, array( $key => $value ) );
+						} else {
+							$this->acfUpdateField( $key, $value );
 						}
+						$is_acf = 1;
 					}
 				}
 			}
@@ -201,7 +199,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param string       $key   Meta key.
 	 * @param string|array $value Meta value.
 	 */
-	protected function updateMeta( $key, $value ) {
+	protected function updateMeta( $key, $value ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
 			update_post_meta( $post->ID, sanitize_key( $key ), $value );
@@ -216,7 +214,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param string       $key   Field key or name.
 	 * @param string|array $value Field value.
 	 */
-	protected function acfUpdateField( $key, $value ) {
+	protected function acfUpdateField( $key, $value ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
 			if ( function_exists( 'update_field' ) ) {
@@ -235,7 +233,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param string       $key   Field key.
 	 * @param string|array $value Field value.
 	 */
-	protected function cfsSave( $key, $value ) {
+	protected function cfsSave( $key, $value ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
 			if ( function_exists( 'CFS' ) ) {
@@ -255,7 +253,7 @@ class MMCSV_Import_Post_Helper {
 	 *
 	 * @param array $data Field data array.
 	 */
-	protected function scfSave( $data ) {
+	protected function scfSave( $data ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
 			if ( class_exists( 'Smart_Custom_Fields_Meta' ) && is_array( $data ) ) {
@@ -280,7 +278,7 @@ class MMCSV_Import_Post_Helper {
 	 *
 	 * @param array|string $tags Post tags.
 	 */
-	public function setPostTags( $tags ) {
+	public function setPostTags( $tags ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
 			wp_set_post_tags( $post->ID, $tags );
@@ -295,7 +293,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param string       $taxonomy The taxonomy name.
 	 * @param array|string $terms    The term slug, id, or name.
 	 */
-	public function setObjectTerms( $taxonomy, $terms ) {
+	public function setObjectTerms( $taxonomy, $terms ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
 			wp_set_object_terms( $post->ID, $terms, $taxonomy );
@@ -311,7 +309,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param array|null $data Attachment data.
 	 * @return int|false Attachment ID on success, false on failure.
 	 */
-	public function addMediaFile( $file, $data = null ) {
+	public function addMediaFile( $file, $data = null ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		if ( empty( $file ) ) {
 			return false;
 		}
@@ -333,7 +331,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param string $file Media file URL or path.
 	 * @return bool True on success, false on failure.
 	 */
-	public function addThumbnail( $file ) {
+	public function addThumbnail( $file ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		if ( empty( $file ) ) {
 			return false;
 		}
@@ -362,7 +360,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param array  $data Attachment data.
 	 * @return int Return the attachment id on success, 0 on failure.
 	 */
-	public function setAttachment( $file, $data = array() ) {
+	public function setAttachment( $file, $data = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = $this->getPost();
 		if ( $file && file_exists( $file ) ) {
 			$filename        = basename( $file );
@@ -376,7 +374,7 @@ class MMCSV_Import_Post_Helper {
 			$upload_dir = wp_upload_dir();
 			$guid       = $upload_dir['baseurl'] . '/' . _wp_relative_upload_path( $file );
 
-			$attachment = array_merge(
+			$attachment          = array_merge(
 				array(
 					'post_mime_type' => $type,
 					'guid'           => $guid,
@@ -391,7 +389,7 @@ class MMCSV_Import_Post_Helper {
 			wp_update_attachment_metadata( $attachment_id, $attachment_metadata );
 			return $attachment_id;
 		}
-		// On failure
+		// On failure.
 		return 0;
 	}
 
@@ -400,7 +398,7 @@ class MMCSV_Import_Post_Helper {
 	 *
 	 * @param string $value File path.
 	 */
-	protected function updateAttachment( $value ) {
+	protected function updateAttachment( $value ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		$post = $this->getPost();
 		if ( $post instanceof WP_Post ) {
 			update_attached_file( $post->ID, $value );
@@ -416,7 +414,7 @@ class MMCSV_Import_Post_Helper {
 	 * @param array  $args Request arguments.
 	 * @return string File path on success, empty string on failure.
 	 */
-	public function remoteGet( $url, $args = array() ) {
+	public function remoteGet( $url, $args = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid -- Public API method name kept for backward compatibility.
 		global $wp_filesystem;
 		if ( ! is_object( $wp_filesystem ) ) {
 			WP_Filesystem();

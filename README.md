@@ -21,7 +21,7 @@ Miller Media CSV Importer is a powerful yet simple CSV import plugin for WordPre
 The original Really Simple CSV Importer was last updated in 2017 and is incompatible with modern PHP versions. This fork provides:
 
 - **PHP 8.1+ compatibility** - Fixed all deprecated features and warnings
-- **WordPress 6.9+ compatibility** - Tested and verified with the latest WordPress
+- **WordPress 7.1+ compatibility** - Tested and verified with the latest WordPress
 - **Enhanced security** - Proper sanitization and escaping for all inputs/outputs
 - **Active maintenance** - Regular updates and support
 - **Backward compatibility** - All filter hooks and action hooks maintained
@@ -58,7 +58,7 @@ The original Really Simple CSV Importer was last updated in 2017 and is incompat
 1. Download the plugin ZIP file
 2. Upload to `/wp-content/plugins/` directory
 3. Activate the plugin through the **Plugins** menu in WordPress
-4. Go to **Tools → Import** and click **CSV**
+4. Go to **Tools → Import** and click **Miller Media CSV Importer** (or use the **Import CSV** link on this plugin's row on the Plugins screen)
 
 ---
 
@@ -67,7 +67,7 @@ The original Really Simple CSV Importer was last updated in 2017 and is incompat
 ### Basic Import Process
 
 1. Go to **Tools → Import** in WordPress admin
-2. Click **CSV**
+2. Click **Miller Media CSV Importer**
 3. Choose your CSV file (UTF-8 encoding required)
 4. Click **Upload file and import**
 5. Wait for the import to complete

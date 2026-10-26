@@ -1,18 +1,13 @@
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&pause=1000&color=2271B1&center=true&vCenter=true&width=535&lines=Miller+Media+CSV+Importer" alt="Miller Media CSV Importer" />
-</p>
+<h1 align="center">Miller Media CSV Importer</h1>
 
 <p align="center">
 <pre align="center">
-              ___ _____   __
-             / __/ __\ \ / /
-            | (__\__ \\ V /
-             \___|___/ \_/
+  ___ _____   __
+ / __/ __\ \ / /
+| (__\__ \\ V /
+ \___|___/ \_/
 &nbsp;
- ___ __  __ ___  ___  ___ _____ ___ ___
-|_ _|  \/  | _ \/ _ \| _ \_   _| __| _ \
- | || |\/| |  _/ (_) |   / | | | _||   /
-|___|_|  |_|_|  \___/|_|_\ |_| |___|_|_\
+  [ importer ]
 </pre>
 </p>
 
@@ -28,8 +23,6 @@
 </p>
 
 ---
-
-**Import posts, pages, custom post types, categories, tags, and custom fields from a simple CSV file.**
 
 A maintained fork of [Really Simple CSV Importer](https://wordpress.org/plugins/really-simple-csv-importer/) with PHP 8.1+ compatibility, enhanced security, and active maintenance.
 

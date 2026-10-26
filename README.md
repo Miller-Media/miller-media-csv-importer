@@ -65,15 +65,9 @@ The original Really Simple CSV Importer was last updated in 2017 and is incompat
 
 ## Installation
 
-### From WordPress.org
+### From GitHub Releases
 
-1. Go to **Plugins → Add New** in your WordPress admin
-2. Search for "Miller Media CSV Importer"
-3. Click **Install Now** and then **Activate**
-
-### Manual Installation
-
-1. Download the plugin ZIP file
+1. Download the latest plugin ZIP from the [GitHub releases page](https://github.com/Miller-Media/miller-media-csv-importer/releases)
 2. Upload to `/wp-content/plugins/` directory
 3. Activate the plugin through the **Plugins** menu in WordPress
 4. Go to **Tools → Import** and click **Miller Media CSV Importer** (or use the **Import CSV** link on this plugin's row on the Plugins screen)
@@ -466,7 +460,7 @@ Original cover banner designed by [@luchino__](http://uwasora.com/)
 
 ## Links
 
-- [WordPress.org Plugin Page](https://wordpress.org/plugins/miller-media-csv-importer/)
+- [GitHub Releases](https://github.com/Miller-Media/miller-media-csv-importer/releases)
 - [GitHub Repository](https://github.com/Miller-Media/miller-media-csv-importer)
 - [Original Plugin by Takuro Hishikawa](https://github.com/hissy/rs-csv-importer)
 - [Miller Media](https://www.millermedia.io)

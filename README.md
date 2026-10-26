@@ -1,8 +1,33 @@
-# Miller Media CSV Importer
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&pause=1000&color=2271B1&center=true&vCenter=true&width=535&lines=Miller+Media+CSV+Importer" alt="Miller Media CSV Importer" />
+</p>
 
-[![WordPress Version](https://img.shields.io/badge/WordPress-5.0%2B-blue)](https://wordpress.org/)
-[![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-777BB4)](https://www.php.net/)
-[![License](https://img.shields.io/badge/License-GPLv2-green)](LICENSE)
+<p align="center">
+<pre align="center">
+              ___ _____   __
+             / __/ __\ \ / /
+            | (__\__ \\ V /
+             \___|___/ \_/
+
+ ___ __  __ ___  ___  ___ _____ ___ ___
+|_ _|  \/  | _ \/ _ \| _ \_   _| __| _ \
+ | || |\/| |  _/ (_) |   / | | | _||   /
+|___|_|  |_|_|  \___/|_|_\ |_| |___|_|_\
+</pre>
+</p>
+
+<p align="center">
+  <strong>Import posts, pages, custom post types, taxonomies and custom fields from a simple CSV file.</strong>
+</p>
+
+<p align="center">
+  <a href="https://www.gnu.org/licenses/gpl-2.0.html"><img src="https://img.shields.io/badge/license-GPLv2%2B-blue?style=flat-square" alt="License"></a>
+  <img src="https://img.shields.io/badge/wordpress-5.0%2B-21759B?style=flat-square&logo=wordpress&logoColor=white" alt="WordPress Version">
+  <img src="https://img.shields.io/badge/php-8.1%2B-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP Version">
+  <a href="https://github.com/Miller-Media/miller-media-csv-importer/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Miller-Media/miller-media-csv-importer/ci.yml?label=tests&style=flat-square" alt="Tests"></a>
+</p>
+
+---
 
 **Import posts, pages, custom post types, categories, tags, and custom fields from a simple CSV file.**
 

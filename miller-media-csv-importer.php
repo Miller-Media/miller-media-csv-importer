@@ -7,9 +7,8 @@
  * Author URI: https://mattmiller.ai
  * Text Domain: miller-media-csv-importer
  * Domain Path: /languages
- * Version: 2.0.1
+ * Version: 2.0.2
  * Requires at least: 5.0
- * Tested up to: 7.1
  * Requires PHP: 8.1
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -23,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'MMCSV_PLUGIN_VERSION', '2.0.1' );
+define( 'MMCSV_PLUGIN_VERSION', '2.0.2' );
 
 /**
  * Unique importer id used to register with WordPress and to build admin links.

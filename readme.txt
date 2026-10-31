@@ -4,7 +4,7 @@ Tags: csv, importer, import, acf, custom-fields
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -296,6 +296,9 @@ The plugin ships with translations for: French (fr_FR), Japanese (ja), Spanish (
 * Maintained fork: [Miller Media](https://mattmiller.ai) - [GitHub repository](https://github.com/Miller-Media/miller-media-csv-importer)
 
 == Changelog ==
+
+= 2.0.2 =
+* Removed the Tested up to header from the main plugin file (it is declared in readme.txt).
 
 = 2.0.1 =
 * Fix: register the importer on `admin_init` instead of `plugins_loaded` so WordPress no longer logs a "textdomain loaded too early" notice on every admin request.

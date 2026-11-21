@@ -295,6 +295,12 @@ The plugin ships with translations for: French (fr_FR), Japanese (ja), Spanish (
 * Cover banner designed by @[luchino__](http://uwasora.com/)
 * Maintained fork: [Miller Media](https://mattmiller.ai) - [GitHub repository](https://github.com/Miller-Media/miller-media-csv-importer)
 
+== Screenshots ==
+
+1. The import form under Tools > Import > CSV: import options and the CSV file upload.
+2. Import results, listing each row as it is processed.
+3. The imported posts in the Posts list, with their categories and tags.
+
 == Changelog ==
 
 = 2.0.2 =

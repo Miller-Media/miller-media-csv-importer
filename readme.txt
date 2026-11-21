@@ -292,7 +292,6 @@ The plugin ships with translations for: French (fr_FR), Japanese (ja), Spanish (
 == Credits ==
 
 * Original plugin created by [Takuro Hishikawa](https://github.com/hissy): [Really Simple CSV Importer](https://github.com/hissy/rs-csv-importer)
-* Cover banner designed by @[luchino__](http://uwasora.com/)
 * Maintained fork: [Miller Media](https://mattmiller.ai) - [GitHub repository](https://github.com/Miller-Media/miller-media-csv-importer)
 
 == Screenshots ==

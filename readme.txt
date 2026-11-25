@@ -2,7 +2,7 @@
 Contributors: MillerMediaNow, hissy
 Tags: csv, importer, import, acf, custom-fields
 Requires at least: 5.0
-Tested up to: 7.1
+Tested up to: 7.2
 Requires PHP: 8.1
 Stable tag: 2.0.2
 License: GPL-2.0-or-later
